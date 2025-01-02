@@ -477,4 +477,4 @@ z_index = 4
 material = SubResource("CanvasItemMaterial_pwukr")
 position = Vector2(0, 7)
 texture = ExtResource("3_sc0qy")
-offset = Vector2(2, -5)
+offset = Vector2(4, -5)
