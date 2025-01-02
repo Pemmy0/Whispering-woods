@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://bntwwuoeq7rjd"]
+
+[ext_resource type="Script" path="res://Player/drago.gd" id="1_5g0iv"]
+[ext_resource type="Texture2D" uid="uid://d1t467didvcwj" path="res://Assets/Drago-Sheet.png" id="2_lx8j5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2om3c"]
+atlas = ExtResource("2_lx8j5")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vl5a"]
+atlas = ExtResource("2_lx8j5")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hma26"]
+atlas = ExtResource("2_lx8j5")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0v4bx"]
+atlas = ExtResource("2_lx8j5")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wd2j4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2om3c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2vl5a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hma26")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0v4bx")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mxcdm"]
+size = Vector2(6, 16)
+
+[node name="Drago" type="CharacterBody2D"]
+z_index = 1
+collision_layer = 2
+script = ExtResource("1_5g0iv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wd2j4")
+animation = &"Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 8)
+shape = SubResource("RectangleShape2D_mxcdm")
+
+[node name="Camera2D" type="Camera2D" parent="."]
