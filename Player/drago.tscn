@@ -314,3 +314,12 @@ position = Vector2(-1, 7)
 scale = Vector2(0.231239, 0.231239)
 texture = ExtResource("4_s6x1d")
 offset = Vector2(546.596, -0.000464439)
+
+[node name="HitBox" type="Area2D" parent="PointLight2D"]
+position = Vector2(4.32453, -30.2717)
+scale = Vector2(4.32453, 4.32453)
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PointLight2D/HitBox"]
+polygon = PackedVector2Array(7, 11, 7, 3, 177, -67, 177, 85)
