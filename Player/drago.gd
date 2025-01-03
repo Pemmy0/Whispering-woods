@@ -5,8 +5,10 @@ extends CharacterBody2D
 @onready var flashlight = $PointLight2D
 
 var speed = 25
+var stamina = 50
 var currentDir = 1
 var movement_animation: String
+var cant_run = false
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
@@ -20,6 +22,18 @@ func _physics_process(delta):
 	animation_control(direction)
 	flashlight_control()
 	
+	if stamina < 0:
+		stamina = 0
+		cant_run = true
+	elif stamina < 50:
+		stamina += delta * 10
+	elif stamina > 50:
+		stamina = 50
+		cant_run = false
+		
+	if speed == 50:
+		stamina -= delta * 20
+	
 	move_and_slide()
 
 func movement(direction):
@@ -32,11 +46,15 @@ func movement(direction):
 		velocity.x = move_toward(velocity.x, 0, speed)
 		
 	if Input.is_action_pressed("Run"):
-		speed = 50
-		movement_animation = "Run"
+		if !cant_run:
+			movement_animation = "Run"
+			speed = 50
+		else:
+			movement_animation = "Walk"
+			speed = 25
 	else:
-		speed = 25
 		movement_animation = "Walk"
+		speed = 25
 		
 func animation_control(direction):
 	if direction != 0:
