@@ -46,8 +46,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_syu7b")
 theme_override_styles/fill = SubResource("StyleBoxFlat_4cvif")
-max_value = 50.0
-value = 50.0
+value = 35.0
 show_percentage = false
 
 [node name="Stamina" type="Sprite2D" parent="."]

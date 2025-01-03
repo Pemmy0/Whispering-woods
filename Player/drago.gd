@@ -9,9 +9,12 @@ extends CharacterBody2D
 var speed = 25
 var stamina_max = 50
 var stamina = stamina_max
+var battery_max = 100
+var battery = battery_max
 var currentDir = 1
 var movement_animation: String
 var cant_run = false
+var cant_flash = false
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
@@ -34,7 +37,7 @@ func _physics_process(delta):
 	$CanvasLayer.show()
 	flashlight_control()
 	progress_bar_control()
-	stamina_deplete(delta)
+	bar_deplete(delta)
 
 func movement(direction):
 	if direction:
@@ -60,6 +63,9 @@ func progress_bar_control():
 	stamina_bar.value = stamina
 	stamina_bar.max_value = stamina_max
 	
+	battery_bar.value = battery
+	battery_bar.max_value = battery_max
+	
 	if cant_run:
 		stamina_bar.modulate = Color(255,0,0)
 		$CanvasLayer/StaminaBatteryBar/Stamina.modulate = Color(255,0,0)
@@ -67,7 +73,14 @@ func progress_bar_control():
 		stamina_bar.modulate = Color(255,255,255)
 		$CanvasLayer/StaminaBatteryBar/Stamina.modulate = Color(255,255,255)
 		
-func stamina_deplete(delta):
+	if cant_flash:
+		battery_bar.modulate = Color(255,0,0)
+		$CanvasLayer/StaminaBatteryBar/Battery.modulate = Color(255,0,0)
+	else:
+		battery_bar.modulate = Color(255,255,255)
+		$CanvasLayer/StaminaBatteryBar/Battery.modulate = Color(255,255,255)
+		
+func bar_deplete(delta):
 	if stamina < 0:
 		stamina = 0
 		cant_run = true
@@ -79,8 +92,18 @@ func stamina_deplete(delta):
 		
 	if speed == 50:
 		stamina -= delta * 20
+	
+	if !$PointLight2D/HitBox/CollisionPolygon2D.disabled:
+		battery -= delta * 30
 		
-	print(roundf(stamina))
+	if battery < 0:
+		battery = 0
+		cant_flash = true
+	elif battery < battery_max:
+		battery += delta * 5
+	elif battery > battery_max:
+		battery = battery_max
+		cant_flash = false
 		
 func animation_control(direction):
 	if direction != 0:
@@ -94,9 +117,9 @@ func animation_control(direction):
 		animated_sprite_2d.flip_h = true
 		
 func flashlight_control():
-	$PointLight2D/HitBox/CollisionPolygon2D.disabled = !(Input.is_action_pressed("Flash"))
+	$PointLight2D/HitBox/CollisionPolygon2D.disabled = !(flashlight.visible)
 	
-	if Input.is_action_pressed("Flash"):
+	if Input.is_action_pressed("Flash") && !cant_flash:
 		flashlight.visible = true
 	else:
 		flashlight.visible = false
