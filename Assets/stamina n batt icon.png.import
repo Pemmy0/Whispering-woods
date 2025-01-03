@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bojg2qgo5p35g"
-path="res://.godot/imported/Flashlight Texture light.png-5a516316631dc52dbe750a0b061df489.ctex"
+uid="uid://dea03teaq7274"
+path="res://.godot/imported/stamina n batt icon.png-c62d38f83bd0082e930a448a6b004f1d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Flashlight Texture light.png"
-dest_files=["res://.godot/imported/Flashlight Texture light.png-5a516316631dc52dbe750a0b061df489.ctex"]
+source_file="res://Assets/stamina n batt icon.png"
+dest_files=["res://.godot/imported/stamina n batt icon.png-c62d38f83bd0082e930a448a6b004f1d.ctex"]
 
 [params]
 

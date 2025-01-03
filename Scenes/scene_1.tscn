@@ -89,9 +89,6 @@ limit_top = 0
 limit_right = 320
 limit_bottom = 180
 
-[node name="HitBox" parent="Drago/PointLight2D" index="0"]
-position = Vector2(4.32453, -30.2717)
-
 [node name="Fartalot" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_4344g")]
 position = Vector2(-619, 128)
 player = NodePath("../Drago")
@@ -229,3 +226,4 @@ position = Vector2(-665, 90)
 shape = SubResource("RectangleShape2D_402ey")
 
 [editable path="Drago"]
+[editable path="Drago/CanvasLayer/StaminaBatteryBar"]

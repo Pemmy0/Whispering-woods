@@ -3,10 +3,15 @@ extends CharacterBody2D
 @onready var eyes_sprite = $EyesSprite
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var flashlight = $PointLight2D
+@onready var stamina_bar = $CanvasLayer/StaminaBatteryBar/StaminaBar
+@onready var battery_bar = $CanvasLayer/StaminaBatteryBar/BatteryBar
 
 var speed = 25
+var stamina_max = 50
+var stamina = stamina_max
 var currentDir = 1
 var movement_animation: String
+var cant_run = false
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
@@ -17,10 +22,19 @@ func _physics_process(delta):
 	var direction = Input.get_axis("Left", "Right")
 	
 	movement(direction)
-	animation_control(direction)
-	flashlight_control()
 	
 	move_and_slide()
+	
+	animation_control(direction)
+	
+	if !EnvironmentControl.can_flashlight:
+		$CanvasLayer.hide()
+		return
+	
+	$CanvasLayer.show()
+	flashlight_control()
+	progress_bar_control()
+	stamina_deplete(delta)
 
 func movement(direction):
 	if direction:
@@ -32,11 +46,41 @@ func movement(direction):
 		velocity.x = move_toward(velocity.x, 0, speed)
 		
 	if Input.is_action_pressed("Run"):
-		speed = 50
-		movement_animation = "Run"
+		if !cant_run:
+			movement_animation = "Run"
+			speed = 50
+		else:
+			movement_animation = "Walk"
+			speed = 25
 	else:
-		speed = 25
 		movement_animation = "Walk"
+		speed = 25
+		
+func progress_bar_control():
+	stamina_bar.value = stamina
+	stamina_bar.max_value = stamina_max
+	
+	if cant_run:
+		stamina_bar.modulate = Color(255,0,0)
+		$CanvasLayer/StaminaBatteryBar/Stamina.modulate = Color(255,0,0)
+	else:
+		stamina_bar.modulate = Color(255,255,255)
+		$CanvasLayer/StaminaBatteryBar/Stamina.modulate = Color(255,255,255)
+		
+func stamina_deplete(delta):
+	if stamina < 0:
+		stamina = 0
+		cant_run = true
+	elif stamina < stamina_max:
+		stamina += delta * 10
+	elif stamina > stamina_max:
+		stamina = stamina_max
+		cant_run = false
+		
+	if speed == 50:
+		stamina -= delta * 20
+		
+	print(roundf(stamina))
 		
 func animation_control(direction):
 	if direction != 0:
@@ -50,9 +94,8 @@ func animation_control(direction):
 		animated_sprite_2d.flip_h = true
 		
 func flashlight_control():
-	if !EnvironmentControl.can_flashlight:
-		return
 	$PointLight2D/HitBox/CollisionPolygon2D.disabled = !(Input.is_action_pressed("Flash"))
+	
 	if Input.is_action_pressed("Flash"):
 		flashlight.visible = true
 	else:
@@ -70,6 +113,4 @@ func flashlight_control():
 func _flip_light():
 	var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	flashlight.scale.x = 0
-	#flashlight.energy = 0
 	tween.tween_property(flashlight, "scale", Vector2(0.231, 0.231), 0.2)
-	#tween.tween_property(flashlight, "energy", 1, 0.1)
