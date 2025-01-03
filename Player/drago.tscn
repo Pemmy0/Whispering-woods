@@ -1,7 +1,8 @@
-[gd_scene load_steps=43 format=3 uid="uid://bntwwuoeq7rjd"]
+[gd_scene load_steps=44 format=3 uid="uid://bntwwuoeq7rjd"]
 
 [ext_resource type="Script" path="res://Player/drago.gd" id="1_5g0iv"]
 [ext_resource type="Texture2D" uid="uid://d1t467didvcwj" path="res://Assets/Drago-Sheet.png" id="2_lx8j5"]
+[ext_resource type="PackedScene" uid="uid://b6yjahecub4sr" path="res://Scenes/stamina_battery_bar.tscn" id="4_fv4pi"]
 [ext_resource type="Texture2D" uid="uid://c4gq02xrbvhjm" path="res://Assets/flashlight.png" id="4_s6x1d"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k2vpg"]
@@ -323,3 +324,9 @@ collision_mask = 4
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PointLight2D/HitBox"]
 polygon = PackedVector2Array(7, 11, 7, 3, 177, -67, 177, 85)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="StaminaBatteryBar" parent="CanvasLayer" instance=ExtResource("4_fv4pi")]
+
+[editable path="CanvasLayer/StaminaBatteryBar"]

@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6yjahecub4sr"]
+
+[ext_resource type="Texture2D" uid="uid://dea03teaq7274" path="res://Assets/stamina n batt icon.png" id="1_vrpxr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_syu7b"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4cvif"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="StaminaBatteryBar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StaminaBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 10.0
+offset_right = -245.0
+offset_bottom = -164.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_syu7b")
+theme_override_styles/fill = SubResource("StyleBoxFlat_4cvif")
+max_value = 50.0
+value = 30.0
+show_percentage = false
+
+[node name="BatteryBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 26.0
+offset_right = -245.0
+offset_bottom = -148.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_syu7b")
+theme_override_styles/fill = SubResource("StyleBoxFlat_4cvif")
+max_value = 50.0
+value = 50.0
+show_percentage = false
+
+[node name="Stamina" type="Sprite2D" parent="."]
+position = Vector2(7.5, 10.5)
+texture = ExtResource("1_vrpxr")
+hframes = 2
+
+[node name="Battery" type="Sprite2D" parent="."]
+position = Vector2(7.5, 26.5)
+texture = ExtResource("1_vrpxr")
+hframes = 2
+frame = 1
