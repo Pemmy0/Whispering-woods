@@ -52,7 +52,7 @@ func animation_control(direction):
 func flashlight_control():
 	if !EnvironmentControl.can_flashlight:
 		return
-	
+	$PointLight2D/HitBox/CollisionPolygon2D.disabled = !(Input.is_action_pressed("Flash"))
 	if Input.is_action_pressed("Flash"):
 		flashlight.visible = true
 	else:

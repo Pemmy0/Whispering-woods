@@ -1,77 +1,10 @@
-[gd_scene load_steps=23 format=4 uid="uid://cwep8hedvali2"]
+[gd_scene load_steps=13 format=4 uid="uid://cwep8hedvali2"]
 
 [ext_resource type="Script" path="res://Scripts/scene_1.gd" id="1_6ndia"]
 [ext_resource type="PackedScene" uid="uid://bntwwuoeq7rjd" path="res://Player/drago.tscn" id="1_xd8ef"]
-[ext_resource type="Texture2D" uid="uid://wb1e1yd8xg3u" path="res://Assets/Fartabunch-Sheet.png" id="2_c842y"]
 [ext_resource type="Texture2D" uid="uid://3k8v7m4mrwrt" path="res://Assets/Tileset.png" id="2_misxq"]
 [ext_resource type="Texture2D" uid="uid://csblosj6qlsrr" path="res://Assets/Background-Sheet.png" id="3_0xkls"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2ym6b"]
-light_mode = 1
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_iys0v"]
-atlas = ExtResource("2_c842y")
-region = Rect2(0, 0, 32, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qs80a"]
-atlas = ExtResource("2_c842y")
-region = Rect2(32, 0, 32, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_llsku"]
-atlas = ExtResource("2_c842y")
-region = Rect2(64, 0, 32, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ptkqi"]
-atlas = ExtResource("2_c842y")
-region = Rect2(96, 0, 32, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6xufe"]
-atlas = ExtResource("2_c842y")
-region = Rect2(128, 0, 32, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_73ux0"]
-atlas = ExtResource("2_c842y")
-region = Rect2(160, 0, 32, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kifti"]
-atlas = ExtResource("2_c842y")
-region = Rect2(192, 0, 32, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qjsgk"]
-atlas = ExtResource("2_c842y")
-region = Rect2(224, 0, 32, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_b465p"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_iys0v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qs80a")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_llsku")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ptkqi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6xufe")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_73ux0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kifti")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qjsgk")
-}],
-"loop": true,
-"name": &"Idle",
-"speed": 3.0
-}]
+[ext_resource type="PackedScene" uid="uid://b0oecr3dh2xjk" path="res://Monster/fartalot.tscn" id="4_4344g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8bqs7"]
 texture = ExtResource("2_misxq")
@@ -147,21 +80,21 @@ script = ExtResource("1_6ndia")
 position = Vector2(0, 5)
 color = Color(0, 0, 0, 1)
 
-[node name="Monster" type="AnimatedSprite2D" parent="."]
-z_index = 1
-material = SubResource("CanvasItemMaterial_2ym6b")
-position = Vector2(212, 112)
-sprite_frames = SubResource("SpriteFrames_b465p")
-animation = &"Idle"
-
 [node name="Drago" parent="." instance=ExtResource("1_xd8ef")]
-position = Vector2(112, 128)
+position = Vector2(-397, 128)
 
 [node name="Camera2D" parent="Drago" index="2"]
 limit_left = -640
 limit_top = 0
 limit_right = 320
 limit_bottom = 180
+
+[node name="HitBox" parent="Drago/PointLight2D" index="0"]
+position = Vector2(4.32453, -30.2717)
+
+[node name="Fartalot" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_4344g")]
+position = Vector2(-619, 128)
+player = NodePath("../Drago")
 
 [node name="GroundTile" type="TileMapLayer" parent="."]
 z_index = 1
