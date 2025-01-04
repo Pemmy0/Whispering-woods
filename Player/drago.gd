@@ -17,6 +17,8 @@ var movement_animation: String
 var cant_run = false
 var cant_flash = false
 var tickle = 1
+var babayaga = 0
+var move_allowed = true
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
@@ -24,10 +26,16 @@ func _ready():
 	flashlight.visible = false
 	
 func _physics_process(delta):
-	var direction = Input.get_axis("Left", "Right")
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+		
+	var direction: int = 0
+	
+	if move_allowed:
+		direction = Input.get_axis("Left", "Right")
 	
 	movement(direction)
-	
+	auto_move(babayaga)
 	move_and_slide()
 	
 	animation_control(direction)
@@ -50,7 +58,9 @@ func _physics_process(delta):
 		flashlight.enabled = true
 
 func movement(direction):
-	if direction:
+	if !move_allowed:
+		return
+	if direction != 0:
 		if direction != currentDir:
 			_flip_light()
 		currentDir = direction
@@ -121,9 +131,9 @@ func animation_control(direction):
 	elif velocity.x == 0:
 		animated_sprite_2d.play("Idle")
 	
-	if direction == 1:
+	if direction == 1 || babayaga == 1:
 		animated_sprite_2d.flip_h = false
-	elif direction == -1:
+	elif direction == -1 || babayaga == -1:
 		animated_sprite_2d.flip_h = true
 		
 func flashlight_control():
@@ -174,3 +184,7 @@ func _flip_light():
 	var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	flashlight.scale.x = 0
 	tween.tween_property(flashlight, "scale", Vector2(0.231, 0.231), 0.2)
+
+func auto_move(babayaga):
+	if !move_allowed:
+		velocity.x = babayaga * speed
