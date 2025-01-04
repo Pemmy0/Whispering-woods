@@ -1,7 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://b0oecr3dh2xjk"]
+[gd_scene load_steps=21 format=3 uid="uid://b0oecr3dh2xjk"]
 
 [ext_resource type="Script" path="res://Monster/fartalot.gd" id="1_k4ys2"]
 [ext_resource type="Texture2D" uid="uid://c2dkfj7fftuap" path="res://Assets/Fartalot-Sheet.png" id="2_r4xh2"]
+[ext_resource type="AudioStream" uid="uid://y0s1gsa2cwtw" path="res://SFX/Monster Breathe Chase.mp3" id="3_ce5qo"]
+[ext_resource type="AudioStream" uid="uid://udmh4eppmij3" path="res://SFX/Stab.mp3" id="4_jqtm4"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_36lgd"]
 light_mode = 1
@@ -132,6 +134,15 @@ collision_mask = 10
 position = Vector2(1, 3.5)
 shape = SubResource("RectangleShape2D_ljq0y")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="MonsterNoise" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ce5qo")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_jqtm4")
+
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="area_exited" from="HurtBox" to="." method="_on_hurt_box_area_exited"]
 [connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=31 format=4 uid="uid://56owp6o16s40"]
+[gd_scene load_steps=39 format=4 uid="uid://56owp6o16s40"]
 
-[ext_resource type="Script" path="res://Player/drago_tutorial.gd" id="2_wla6v"]
+[ext_resource type="Script" path="res://Scripts/scene_0_1.gd" id="1_347pb"]
 [ext_resource type="PackedScene" uid="uid://bntwwuoeq7rjd" path="res://Player/drago.tscn" id="3_khvvx"]
+[ext_resource type="AudioStream" uid="uid://cgq2xuj3o5ymo" path="res://SFX/Walk Grass 2.mp3" id="4_lnwsh"]
 [ext_resource type="Shader" path="res://Shaders/motion_blur.gdshader" id="4_mdewh"]
 [ext_resource type="Texture2D" uid="uid://3k8v7m4mrwrt" path="res://Assets/Tileset.png" id="6_pt0pl"]
 [ext_resource type="Script" path="res://Scripts/transition_area2.gd" id="7_0ifij"]
@@ -11,6 +12,12 @@
 [ext_resource type="Texture2D" uid="uid://bljsngm7u0vkh" path="res://Assets/key.png" id="9_cpdhp"]
 [ext_resource type="Script" path="res://Scripts/flashlight.gd" id="10_4gsmd"]
 [ext_resource type="FontFile" uid="uid://dc78awiwq35bs" path="res://Assets/pixel_font.ttf" id="11_1i347"]
+[ext_resource type="AudioStream" uid="uid://4j5hrvmo5adk" path="res://SFX/key.mp3" id="12_ui35e"]
+[ext_resource type="AudioStream" uid="uid://dp2cqvwix2xe8" path="res://SFX/Rain Ambience.mp3" id="13_c382c"]
+[ext_resource type="Script" path="res://Scripts/noise_trigger.gd" id="13_ip2ng"]
+[ext_resource type="AudioStream" uid="uid://du8jp0qkxgmx1" path="res://SFX/Door Open and Close.mp3" id="15_5h47q"]
+[ext_resource type="AudioStream" uid="uid://bbr0vyaugmrst" path="res://SFX/Clicking.mp3" id="16_l06ut"]
+[ext_resource type="AudioStream" uid="uid://hy1gfp0m7dg3" path="res://SFX/Monster Breathing slow.mp3" id="18_l506a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rowm8"]
 shader = ExtResource("4_mdewh")
@@ -129,21 +136,7 @@ size = Vector2(20, 35.0001)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5mbyn"]
 size = Vector2(4, 7)
 
-[sub_resource type="Animation" id="Animation_vukub"]
-resource_name = "get em key"
-length = 3.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TransitionArea/MarginContainer/Label:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.233333, 2, 3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6fu8o"]
 
 [sub_resource type="Animation" id="Animation_e4jgi"]
 length = 0.001
@@ -160,6 +153,22 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_vukub"]
+resource_name = "get em key"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TransitionArea/MarginContainer/Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1rlbm"]
 _data = {
 "RESET": SubResource("Animation_e4jgi"),
@@ -168,6 +177,7 @@ _data = {
 
 [node name="Scene_0_1" type="Node2D"]
 position = Vector2(0, -6)
+script = ExtResource("1_347pb")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 position = Vector2(0, 5)
@@ -175,7 +185,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="Drago" parent="." instance=ExtResource("3_khvvx")]
 position = Vector2(-479, 128)
-script = ExtResource("2_wla6v")
+sfx_dry = ExtResource("4_lnwsh")
 
 [node name="Camera2D" parent="Drago" index="2"]
 limit_left = -640
@@ -433,16 +443,45 @@ theme_override_font_sizes/font_size = 6
 text = "Pick up flashlight"
 horizontal_alignment = 1
 
+[node name="NoiseTrigger" type="Area2D" parent="."]
+position = Vector2(-252, 133)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_ip2ng")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NoiseTrigger"]
+shape = SubResource("RectangleShape2D_6fu8o")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_1rlbm")
 }
+
+[node name="RainSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_c382c")
+volume_db = -8.0
+
+[node name="KeySFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_ui35e")
+volume_db = 10.306
+
+[node name="DoorSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_5h47q")
+
+[node name="FlashPick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_l06ut")
+volume_db = 11.243
+
+[node name="MonsterSounds" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_l506a")
+volume_db = -2.0
 
 [connection signal="area_entered" from="TransitionArea" to="TransitionArea" method="_on_area_entered"]
 [connection signal="area_entered" from="Key" to="Key" method="_on_area_entered"]
 [connection signal="area_entered" from="Flashlight" to="Flashlight" method="_on_area_entered"]
 [connection signal="body_entered" from="Flashlight" to="Flashlight" method="_on_body_entered"]
 [connection signal="body_exited" from="Flashlight" to="Flashlight" method="_on_body_exited"]
+[connection signal="body_entered" from="NoiseTrigger" to="NoiseTrigger" method="_on_body_entered"]
 
 [editable path="Drago"]
 [editable path="Drago/CanvasLayer/StaminaBatteryBar"]

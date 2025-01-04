@@ -2,6 +2,9 @@ extends Control
 
 var hit_once = false
 
+func _ready():
+	pass
+
 func _unhandled_input(event):
 	if Input.is_action_just_pressed("Interact") && !hit_once:
 		hit_once = true
