@@ -99,7 +99,7 @@ position = Vector2(0, 5)
 color = Color(0, 0, 0, 1)
 
 [node name="Drago" parent="." instance=ExtResource("1_xd8ef")]
-position = Vector2(-397, 128)
+position = Vector2(-479, 128)
 
 [node name="Camera2D" parent="Drago" index="2"]
 limit_left = -640
@@ -107,10 +107,16 @@ limit_top = 0
 limit_right = 320
 limit_bottom = 180
 
+[node name="HitBox" parent="Drago" index="4"]
+position = Vector2(0, 2.38419e-06)
+
+[node name="CollisionPolygon2D" parent="Drago/HitBox" index="0"]
+position = Vector2(-1, 6)
+
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Drago"]
 z_index = 10
 material = SubResource("ShaderMaterial_rowm8")
-position = Vector2(-39, -187)
+position = Vector2(-37, -187)
 amount = 300
 process_material = SubResource("ParticleProcessMaterial_dbcvk")
 lifetime = 2.0
@@ -118,7 +124,7 @@ preprocess = 2.0
 visibility_rect = Rect2(-700, -400, 1000, 1000)
 
 [node name="Fartalot" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_4344g")]
-position = Vector2(-619, 128)
+position = Vector2(-704, 128)
 player = NodePath("../Drago")
 
 [node name="GroundTile" type="TileMapLayer" parent="."]

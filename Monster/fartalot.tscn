@@ -112,6 +112,7 @@ size = Vector2(10, 13)
 [node name="Fartalot" type="CharacterBody2D"]
 z_index = 1
 collision_layer = 4
+collision_mask = 0
 script = ExtResource("1_k4ys2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

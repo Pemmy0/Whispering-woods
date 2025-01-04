@@ -18,7 +18,7 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		
-	if speed > 0:speed += delta * 12.5
+	if speed > 0:speed += delta * 15
 	
 	animation_control(direction)
 
@@ -37,7 +37,6 @@ func animation_control(direction):
 
 func _on_hurt_box_area_entered(area):
 	speed = 0
-	print("ouchie nono")
 	
 func _on_hurt_box_area_exited(area):
 	speed = 10

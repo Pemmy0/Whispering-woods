@@ -132,7 +132,7 @@ func flashlight_control():
 	if Input.is_action_pressed("Flash") && !cant_flash:
 		flashlight.visible = true
 	elif Input.is_action_just_pressed("Flash") && cant_flash:
-		battery += randi_range(0,5)
+		battery += randi_range(1,5)
 		flashlight.visible = false
 	else:
 		flashlight.visible = false
