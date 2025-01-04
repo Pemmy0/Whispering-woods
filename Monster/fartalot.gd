@@ -3,8 +3,8 @@ extends CharacterBody2D
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @export var player: CharacterBody2D
 
-var speed = 10.0
-var max_speed = 10
+var speed = 20.0
+var max_speed = 20
 var direction : float
 var player_distance
 

@@ -16,8 +16,8 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 7, 7.03333, 13.5, 13.5333, 19.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": ["Drago was never to be seen again", "Drago was never to be seen again", "Last seen January 5th 2025", "Last seen January 5th 2025", "And that's why,
-we don't play in the woods", "And that's why,
+"values": ["Drago was never to be seen again", "Drago was never to be seen again", "Last seen January 5th 2025", "Last seen January 5th 2025", "And that's why
+we don't play in the woods", "And that's why
 we don't play in the woods"]
 }
 tracks/1/type = "value"

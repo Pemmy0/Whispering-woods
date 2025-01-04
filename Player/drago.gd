@@ -59,7 +59,7 @@ func _physics_process(delta):
 func movement(direction):
 	if !move_allowed:
 		return
-	if direction != 0:
+	if direction:
 		if direction != currentDir:
 			_flip_light()
 		currentDir = direction
@@ -146,25 +146,16 @@ func flashlight_control():
 	else:
 		flashlight.visible = false
 		
-	var has_tickled = false
-	if Input.is_action_pressed("Big Flash") && !has_tickled:
+	if Input.is_action_just_pressed("Big Flash"):
 		tickle = 2
 		var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT).set_parallel(true)
-		flashlight.scale.y = 0.231
-		flash_cols.scale.y = 1.8
-		flashlight.energy = 1
 		tween.tween_property(flashlight, "scale", Vector2(0.231, 0.5), 0.2)
 		tween.tween_property(flashlight, "energy", 2, 0.2)
-		has_tickled = true
-	else:
+	elif Input.is_action_just_released("Big Flash"):
 		tickle = 1
 		var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT).set_parallel(true)
-		flashlight.scale.y = 0.5
-		flash_cols.scale.y = 1
-		flashlight.energy = 2
 		tween.tween_property(flashlight, "scale", Vector2(0.231, 0.231), 0.2)
 		tween.tween_property(flashlight, "energy", 1, 0.2)
-		has_tickled = false
 	
 	var mousePos = get_local_mouse_position()
 	var clamp
@@ -178,10 +169,9 @@ func flashlight_control():
 	
 	if battery <= 50 && battery > 0:
 		var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-		flashlight.energy = 1
 		tween.tween_property(flashlight, "energy", 0.5, 0.5)
 	else:
-		flashlight.energy = 1
+		return
 	
 func _flip_light():
 	var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)

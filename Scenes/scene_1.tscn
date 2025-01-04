@@ -235,9 +235,10 @@ _data = {
 "get em key": SubResource("Animation_vukub")
 }
 
-[node name="Scene_1" type="Node2D"]
+[node name="Scene_1" type="Node2D" node_paths=PackedStringArray("drago")]
 position = Vector2(0, -6)
 script = ExtResource("1_6ndia")
+drago = NodePath("Drago")
 
 [node name="Fartabunch" type="AnimatedSprite2D" parent="."]
 z_index = 1
@@ -440,7 +441,7 @@ polygon = PackedVector2Array(255, 138, 259, 136, 264, 136, 268, 133, 273, 133, 2
 
 [node name="Key" type="Area2D" parent="."]
 z_index = 1
-position = Vector2(216, 143)
+position = Vector2(-53, 143)
 collision_layer = 0
 collision_mask = 16
 script = ExtResource("9_3kcdh")
@@ -483,7 +484,7 @@ text = "Needs Key"
 horizontal_alignment = 1
 
 [node name="trigger" type="Area2D" parent="."]
-position = Vector2(-404, 135)
+position = Vector2(-458, 135)
 scale = Vector2(0.4, 1)
 collision_layer = 0
 collision_mask = 2
@@ -493,7 +494,7 @@ script = ExtResource("13_f3to8")
 shape = SubResource("RectangleShape2D_wgurj")
 
 [node name="trigger2" type="Area2D" parent="."]
-position = Vector2(85, 135)
+position = Vector2(119, 135)
 scale = Vector2(0.4, 1)
 collision_layer = 0
 collision_mask = 4
