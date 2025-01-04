@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dgtkxo40gis5r"
+path="res://.godot/imported/No Stamina Breathe.mp3-d84cc083bb0fd965c7f171b290ab7018.mp3str"
+
+[deps]
+
+source_file="res://SFX/No Stamina Breathe.mp3"
+dest_files=["res://.godot/imported/No Stamina Breathe.mp3-d84cc083bb0fd965c7f171b290ab7018.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

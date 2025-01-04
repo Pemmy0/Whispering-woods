@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://56gdvw0s8v6x"
+path="res://.godot/imported/Wet Grass 1.mp3-6472d74a267bdc84e310c014fe1bfd58.mp3str"
+
+[deps]
+
+source_file="res://SFX/Wet Grass 1.mp3"
+dest_files=["res://.godot/imported/Wet Grass 1.mp3-6472d74a267bdc84e310c014fe1bfd58.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
