@@ -37,6 +37,7 @@ func animation_control(direction):
 
 func _on_hurt_box_area_entered(area):
 	speed = 0
+	print("ouchie nono")
 	
 func _on_hurt_box_area_exited(area):
 	speed = 10
