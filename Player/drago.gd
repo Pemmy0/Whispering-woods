@@ -150,17 +150,21 @@ func flashlight_control():
 	var has_tickled = false
 	if Input.is_action_pressed("Big Flash") && !has_tickled:
 		tickle = 2
-		var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT).set_parallel(true)
 		flashlight.scale.y = 0.231
 		flash_cols.scale.y = 1.8
+		flashlight.energy = 1
 		tween.tween_property(flashlight, "scale", Vector2(0.231, 0.5), 0.2)
+		tween.tween_property(flashlight, "energy", 2, 0.2)
 		has_tickled = true
 	else:
 		tickle = 1
-		var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT).set_parallel(true)
 		flashlight.scale.y = 0.5
 		flash_cols.scale.y = 1
+		flashlight.energy = 2
 		tween.tween_property(flashlight, "scale", Vector2(0.231, 0.231), 0.2)
+		tween.tween_property(flashlight, "energy", 1, 0.2)
 		has_tickled = false
 	
 	var mousePos = get_local_mouse_position()
