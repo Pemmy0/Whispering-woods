@@ -1,10 +1,16 @@
 extends CharacterBody2D
 
+@export var sfx_dry: AudioStream
+@export var sfx_wet: AudioStream
+@export var click: AudioStream
+@export var flicker: AudioStream
+
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var flashlight = $PointLight2D
 @onready var stamina_bar = $CanvasLayer/StaminaBatteryBar/StaminaBar
 @onready var battery_bar = $CanvasLayer/StaminaBatteryBar/BatteryBar
 @onready var flash_cols = $HitBox/CollisionPolygon2D
+@onready var audio_stream_player = $AudioStreamPlayer
 
 var speed = 25
 var stamina_max = 100
@@ -18,6 +24,8 @@ var cant_flash = false
 var tickle = 1
 var babayaga = 0
 var move_allowed = true
+
+var footstep_frames: Array = [0, 4]
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
@@ -138,8 +146,16 @@ func flashlight_control():
 	flash_cols.disabled = !(flashlight.visible)
 	
 	if Input.is_action_pressed("Flash") && !cant_flash:
+		load_sfx(click)
+		audio_stream_player.pitch_scale += randf_range(-0.1, 0.1)
+		audio_stream_player.volume_db = 8
+		audio_stream_player.play()
 		flashlight.visible = true
 	elif Input.is_action_just_pressed("Flash") && cant_flash:
+		load_sfx(click)
+		audio_stream_player.pitch_scale += randf_range(-0.1, 0.1)
+		audio_stream_player.volume_db = 8
+		audio_stream_player.play()
 		battery += randi_range(4,8)
 		flashlight.visible = false
 	else:
@@ -180,3 +196,21 @@ func _flip_light():
 func auto_move(babayaga):
 	if !move_allowed:
 		velocity.x = babayaga * speed
+		
+func load_sfx(sfx_to_load):
+	if audio_stream_player.stream != sfx_to_load:
+		audio_stream_player.stop()
+		audio_stream_player.stream = sfx_to_load
+
+func _on_animated_sprite_2d_frame_changed():
+	if animated_sprite_2d.animation == "Idle":
+		return
+	if ObjectLibrary.is_raining:
+		load_sfx(sfx_wet)
+	else: 
+		load_sfx(sfx_dry)
+		
+	if animated_sprite_2d.frame in footstep_frames: 
+		audio_stream_player.pitch_scale += randf_range(-0.1, 0.1)
+		audio_stream_player.volume_db = 2
+		audio_stream_player.play()

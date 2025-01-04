@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://dxanvombil7g6"]
+[gd_scene load_steps=22 format=4 uid="uid://dxanvombil7g6"]
 
 [ext_resource type="Script" path="res://Scripts/intro_scene.gd" id="1_0cuf8"]
 [ext_resource type="PackedScene" uid="uid://bntwwuoeq7rjd" path="res://Player/drago.tscn" id="3_rha75"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://csblosj6qlsrr" path="res://Assets/Background-Sheet.png" id="7_is41k"]
 [ext_resource type="FontFile" uid="uid://dsfa457rfkluc" path="res://Assets/dogicapixelbold.ttf" id="7_r2o3w"]
 [ext_resource type="Texture2D" uid="uid://boogj8hgjqb2l" path="res://Assets/trees.png" id="8_t5k4k"]
+[ext_resource type="AudioStream" uid="uid://dsyo7toro5mjo" path="res://SFX/Forest Ambience.mp3" id="8_wfvj0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8bqs7"]
 texture = ExtResource("6_bn0i6")
@@ -338,6 +339,10 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("7_r2o3w")
 theme_override_font_sizes/font_size = 8
 text = "Press Any Key to Start"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_wfvj0")
+volume_db = -8.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

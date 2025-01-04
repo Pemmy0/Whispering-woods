@@ -1,9 +1,13 @@
-[gd_scene load_steps=45 format=3 uid="uid://bntwwuoeq7rjd"]
+[gd_scene load_steps=49 format=3 uid="uid://bntwwuoeq7rjd"]
 
 [ext_resource type="Script" path="res://Player/drago.gd" id="1_5g0iv"]
+[ext_resource type="AudioStream" uid="uid://cwlffubxoufdj" path="res://SFX/Walk Grass 1.mp3" id="2_aw4jw"]
 [ext_resource type="Texture2D" uid="uid://d1t467didvcwj" path="res://Assets/Drago-Sheet.png" id="2_lx8j5"]
+[ext_resource type="AudioStream" uid="uid://56gdvw0s8v6x" path="res://SFX/Wet Grass 1.mp3" id="3_60sgq"]
+[ext_resource type="AudioStream" uid="uid://bbr0vyaugmrst" path="res://SFX/Clicking.mp3" id="4_7ib50"]
 [ext_resource type="PackedScene" uid="uid://b6yjahecub4sr" path="res://Scenes/stamina_battery_bar.tscn" id="4_fv4pi"]
 [ext_resource type="Texture2D" uid="uid://c4gq02xrbvhjm" path="res://Assets/flashlight.png" id="4_s6x1d"]
+[ext_resource type="AudioStream" uid="uid://dim0s166riss4" path="res://SFX/flicker.mp3" id="5_mxoqt"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k2vpg"]
 light_mode = 1
@@ -298,11 +302,15 @@ size = Vector2(8, 16)
 z_index = 1
 collision_layer = 2
 script = ExtResource("1_5g0iv")
+sfx_dry = ExtResource("2_aw4jw")
+sfx_wet = ExtResource("3_60sgq")
+click = ExtResource("4_7ib50")
+flicker = ExtResource("5_mxoqt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("CanvasItemMaterial_k2vpg")
 sprite_frames = SubResource("SpriteFrames_wd2j4")
-animation = &"Idle"
+animation = &"Walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 8)
@@ -342,5 +350,9 @@ collision_mask = 0
 position = Vector2(-1, 8)
 shape = SubResource("RectangleShape2D_gfgn3")
 disabled = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 
 [editable path="CanvasLayer/StaminaBatteryBar"]
