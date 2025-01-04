@@ -107,12 +107,6 @@ limit_top = 0
 limit_right = 320
 limit_bottom = 180
 
-[node name="HitBox" parent="Drago" index="4"]
-position = Vector2(0, 2.38419e-06)
-
-[node name="CollisionPolygon2D" parent="Drago/HitBox" index="0"]
-position = Vector2(-1, 6)
-
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Drago"]
 z_index = 10
 material = SubResource("ShaderMaterial_rowm8")

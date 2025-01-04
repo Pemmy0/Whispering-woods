@@ -42,11 +42,11 @@ func _physics_process(delta):
 	bar_deplete(delta)
 	
 	#flicker
-	if battery <= 25 && battery > 0:
+	if battery <= 15 && battery > 0:
 		var random = randi_range(0,3)
 		if random == 1:
 			flashlight.enabled = !flashlight.enabled
-	if battery > 25:
+	if battery > 15:
 		flashlight.enabled = true
 
 func movement(direction):
