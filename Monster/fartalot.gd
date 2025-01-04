@@ -4,10 +4,18 @@ extends CharacterBody2D
 @export var player: CharacterBody2D
 
 var speed = 10.0
+var direction : float
+var player_distance
 	
 func _physics_process(delta):
-	var player_distance = player.global_position - global_position
-	var direction : float
+	player_distance = player.global_position - global_position
+	
+	movement(delta)
+	animation_control(direction)
+
+	move_and_slide()
+	
+func movement(delta):
 	if player.position.x > position.x:
 		direction = 1
 	elif player.position.x < position.x:
@@ -19,10 +27,6 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, speed)
 		
 	if speed > 0:speed += delta * 15
-	
-	animation_control(direction)
-
-	move_and_slide()
 	
 func animation_control(direction):
 	if velocity.x != 0:

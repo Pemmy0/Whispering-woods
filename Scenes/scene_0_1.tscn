@@ -96,7 +96,7 @@ sources/0 = SubResource("TileSetAtlasSource_kr53w")
 size = Vector2(51, 180)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_is3we"]
-size = Vector2(8, 20)
+size = Vector2(15, 20)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bet4c"]
 light_mode = 1
@@ -367,7 +367,7 @@ collision_mask = 16
 script = ExtResource("7_0ifij")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
-position = Vector2(-636, 134)
+position = Vector2(-639.5, 134)
 shape = SubResource("RectangleShape2D_is3we")
 
 [node name="MarginContainer" type="MarginContainer" parent="TransitionArea"]
@@ -389,7 +389,7 @@ horizontal_alignment = 1
 
 [node name="Key" type="Area2D" parent="." node_paths=PackedStringArray("drago")]
 z_index = 1
-position = Vector2(186, 143)
+position = Vector2(186, 144)
 collision_layer = 0
 collision_mask = 16
 script = ExtResource("8_iclvf")
