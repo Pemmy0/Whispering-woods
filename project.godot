@@ -18,6 +18,7 @@ config/features=PackedStringArray("4.3", "GL Compatibility")
 
 GameManager="*res://Singletons/game_manager.gd"
 EnvironmentControl="*res://Singletons/environment_control.gd"
+Transition="*res://Singletons/transition.tscn"
 
 [display]
 
