@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://cwep8hedvali2"]
+[gd_scene load_steps=44 format=4 uid="uid://cwep8hedvali2"]
 
 [ext_resource type="Script" path="res://Scripts/scene_1.gd" id="1_6ndia"]
 [ext_resource type="Shader" path="res://Shaders/motion_blur.gdshader" id="1_thqcq"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://bljsngm7u0vkh" path="res://Assets/key.png" id="10_b3k6f"]
 [ext_resource type="Script" path="res://Scripts/transition_area3.gd" id="11_lhjno"]
 [ext_resource type="FontFile" uid="uid://dc78awiwq35bs" path="res://Assets/pixel_font.ttf" id="12_4guan"]
+[ext_resource type="Script" path="res://Scripts/trigger1.gd" id="13_f3to8"]
+[ext_resource type="Script" path="res://Scripts/trigger_2.gd" id="14_6qrkp"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tnuj8"]
 light_mode = 1
@@ -194,6 +196,45 @@ size = Vector2(15, 20)
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_aynb6"]
 light_mode = 1
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wgurj"]
+
+[sub_resource type="Animation" id="Animation_vukub"]
+resource_name = "get em key"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TransitionArea/MarginContainer/Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_e4jgi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TransitionArea/MarginContainer/Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1rlbm"]
+_data = {
+"RESET": SubResource("Animation_e4jgi"),
+"get em key": SubResource("Animation_vukub")
+}
+
 [node name="Scene_1" type="Node2D"]
 position = Vector2(0, -6)
 script = ExtResource("1_6ndia")
@@ -206,7 +247,6 @@ sprite_frames = SubResource("SpriteFrames_l433a")
 animation = &"Idle"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 position = Vector2(0, 5)
 color = Color(0, 0, 0, 1)
 
@@ -230,7 +270,7 @@ preprocess = 2.0
 visibility_rect = Rect2(-700, -400, 1000, 1000)
 
 [node name="Fartalot" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_4344g")]
-position = Vector2(-704, 128)
+position = Vector2(-656, 128)
 player = NodePath("../Drago")
 
 [node name="GroundTile" type="TileMapLayer" parent="."]
@@ -442,8 +482,36 @@ theme_override_font_sizes/font_size = 6
 text = "Needs Key"
 horizontal_alignment = 1
 
+[node name="trigger" type="Area2D" parent="."]
+position = Vector2(-404, 135)
+scale = Vector2(0.4, 1)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("13_f3to8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="trigger"]
+shape = SubResource("RectangleShape2D_wgurj")
+
+[node name="trigger2" type="Area2D" parent="."]
+position = Vector2(85, 135)
+scale = Vector2(0.4, 1)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("14_6qrkp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="trigger2"]
+shape = SubResource("RectangleShape2D_wgurj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1rlbm")
+}
+
 [connection signal="area_entered" from="Key" to="Key" method="_on_area_entered"]
 [connection signal="area_entered" from="TransitionArea" to="TransitionArea" method="_on_area_entered"]
+[connection signal="body_entered" from="trigger" to="trigger" method="_on_body_entered"]
+[connection signal="area_entered" from="trigger2" to="trigger2" method="_on_area_entered"]
+[connection signal="body_entered" from="trigger2" to="trigger2" method="_on_body_entered"]
 
 [editable path="Drago"]
 [editable path="Drago/CanvasLayer/StaminaBatteryBar"]
