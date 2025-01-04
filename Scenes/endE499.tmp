@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://dv4jxdcnos6lb"]
+
+[ext_resource type="Script" path="res://Scripts/ending_screen.gd" id="1_cbnni"]
+[ext_resource type="FontFile" uid="uid://dsfa457rfkluc" path="res://Assets/dogicapixelbold.ttf" id="2_ea7l8"]
+
+[node name="Ending Screen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_cbnni")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+offset_left = -82.0
+offset_top = -46.0
+offset_right = -42.0
+offset_bottom = -6.0
+scale = Vector2(11.3386, 7.03876)
+color = Color(0, 0, 0, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(160, 90)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 2
+pivot_offset = Vector2(20, 20)
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="MarginContainer"]
+z_index = 10
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_ea7l8")
+theme_override_font_sizes/font_size = 8
+text = "Drago was never to be seen again"
+horizontal_alignment = 1
+vertical_alignment = 1

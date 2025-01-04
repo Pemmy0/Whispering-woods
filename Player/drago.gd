@@ -24,6 +24,7 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	movement_animation = "Walk"
 	flashlight.visible = false
+	$CanvasLayer.hide()
 	
 func _physics_process(delta):
 	if not is_on_floor():
@@ -43,12 +44,8 @@ func _physics_process(delta):
 	$InteractBox/CollisionShape2D.disabled = !(Input.is_action_just_pressed("Interact"))
 	
 	if !EnvironmentControl.can_flashlight:
-		$CanvasLayer.hide()
 		return
-	
-	$CanvasLayer.show()
 	flashlight_control()
-	progress_bar_control()
 	bar_deplete(delta)
 	
 	#flicker
