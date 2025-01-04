@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var flashlight = $PointLight2D
 @onready var stamina_bar = $CanvasLayer/StaminaBatteryBar/StaminaBar
 @onready var battery_bar = $CanvasLayer/StaminaBatteryBar/BatteryBar
+@onready var flash_cols = $HitBox/CollisionPolygon2D
 
 var speed = 25
 var stamina_max = 50
@@ -15,6 +16,7 @@ var currentDir = 1
 var movement_animation: String
 var cant_run = false
 var cant_flash = false
+var tickle = 1
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
@@ -38,6 +40,14 @@ func _physics_process(delta):
 	flashlight_control()
 	progress_bar_control()
 	bar_deplete(delta)
+	
+	#flicker
+	if battery <= 25 && battery > 0:
+		var random = randi_range(0,3)
+		if random == 1:
+			flashlight.enabled = !flashlight.enabled
+	if battery > 25:
+		flashlight.enabled = true
 
 func movement(direction):
 	if direction:
@@ -91,19 +101,19 @@ func bar_deplete(delta):
 		cant_run = false
 		
 	if speed == 50:
-		stamina -= delta * 20
-	
-	if !$PointLight2D/HitBox/CollisionPolygon2D.disabled:
-		battery -= delta * 30
+		stamina -= delta * 30 * tickle
 		
 	if battery < 0:
 		battery = 0
 		cant_flash = true
 	elif battery < battery_max:
-		battery += delta * 5
+		battery += delta * 4
 	elif battery > battery_max:
 		battery = battery_max
 		cant_flash = false
+		
+	if !flash_cols.disabled:
+		battery -= delta * 20 * tickle
 		
 func animation_control(direction):
 	if direction != 0:
@@ -117,12 +127,31 @@ func animation_control(direction):
 		animated_sprite_2d.flip_h = true
 		
 func flashlight_control():
-	$PointLight2D/HitBox/CollisionPolygon2D.disabled = !(flashlight.visible)
+	flash_cols.disabled = !(flashlight.visible)
 	
 	if Input.is_action_pressed("Flash") && !cant_flash:
 		flashlight.visible = true
+	elif Input.is_action_just_pressed("Flash") && cant_flash:
+		battery += randi_range(0,5)
+		flashlight.visible = false
 	else:
 		flashlight.visible = false
+		
+	var has_tickled = false
+	if Input.is_action_pressed("Big Flash") && !has_tickled:
+		tickle = 2
+		var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		flashlight.scale.y = 0.231
+		flash_cols.scale.y = 1.8
+		tween.tween_property(flashlight, "scale", Vector2(0.231, 0.5), 0.2)
+		has_tickled = true
+	else:
+		tickle = 1
+		var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		flashlight.scale.y = 0.5
+		flash_cols.scale.y = 1
+		tween.tween_property(flashlight, "scale", Vector2(0.231, 0.231), 0.2)
+		has_tickled = false
 	
 	var mousePos = get_local_mouse_position()
 	var clamp
@@ -132,6 +161,14 @@ func flashlight_control():
 		clamp = clampi(mousePos.x, -999999, -100)
 	var angle = atan2(mousePos.y, clamp)
 	flashlight.rotation = angle
+	flash_cols.rotation = angle
+	
+	if battery <= 50 && battery > 0:
+		var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		flashlight.energy = 1
+		tween.tween_property(flashlight, "energy", 0.5, 0.5)
+	else:
+		flashlight.energy = 1
 	
 func _flip_light():
 	var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
