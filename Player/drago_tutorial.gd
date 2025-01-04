@@ -8,9 +8,9 @@ extends CharacterBody2D
 @onready var flash_cols = $HitBox/CollisionPolygon2D
 
 var speed = 25
-var stamina_max = 50
+var stamina_max = 100
 var stamina = stamina_max
-var battery_max = 100
+var battery_max = 200
 var battery = battery_max
 var currentDir = 1
 var movement_animation: String
@@ -52,11 +52,11 @@ func _physics_process(delta):
 	bar_deplete(delta)
 	
 	#flicker
-	if battery <= 15 && battery > 0:
+	if battery <= 25 && battery > 0:
 		var random = randi_range(0,3)
 		if random == 1:
 			flashlight.enabled = !flashlight.enabled
-	if battery > 15:
+	if battery > 25:
 		flashlight.enabled = true
 
 func movement(direction):
@@ -107,25 +107,25 @@ func bar_deplete(delta):
 		stamina = 0
 		cant_run = true
 	elif stamina < stamina_max:
-		stamina += delta * 10
+		stamina += delta * 25
 	elif stamina > stamina_max:
 		stamina = stamina_max
 		cant_run = false
 		
 	if speed == 50:
-		stamina -= delta * 30
+		stamina -= delta * 40
 		
 	if battery < 0:
 		battery = 0
 		cant_flash = true
 	elif battery < battery_max:
-		battery += delta * 4
+		battery += delta * 15
 	elif battery > battery_max:
 		battery = battery_max
 		cant_flash = false
 		
 	if !flash_cols.disabled:
-		battery -= delta * 20 * tickle
+		battery -= delta * 30 * tickle
 		
 func animation_control(direction):
 	if direction != 0:
@@ -144,7 +144,7 @@ func flashlight_control():
 	if Input.is_action_pressed("Flash") && !cant_flash:
 		flashlight.visible = true
 	elif Input.is_action_just_pressed("Flash") && cant_flash:
-		battery += randi_range(1,5)
+		battery += randi_range(4,8)
 		flashlight.visible = false
 	else:
 		flashlight.visible = false
