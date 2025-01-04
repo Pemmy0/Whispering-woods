@@ -1,100 +1,15 @@
-[gd_scene load_steps=28 format=4 uid="uid://cwep8hedvali2"]
+[gd_scene load_steps=21 format=4 uid="uid://dxanvombil7g6"]
 
-[ext_resource type="Script" path="res://Scripts/scene_1.gd" id="1_6ndia"]
-[ext_resource type="Shader" path="res://Shaders/motion_blur.gdshader" id="1_thqcq"]
-[ext_resource type="PackedScene" uid="uid://bntwwuoeq7rjd" path="res://Player/drago.tscn" id="1_xd8ef"]
-[ext_resource type="Texture2D" uid="uid://3k8v7m4mrwrt" path="res://Assets/Tileset.png" id="2_misxq"]
-[ext_resource type="Texture2D" uid="uid://wb1e1yd8xg3u" path="res://Assets/Fartabunch-Sheet.png" id="2_toqc2"]
-[ext_resource type="Texture2D" uid="uid://csblosj6qlsrr" path="res://Assets/Background-Sheet.png" id="3_0xkls"]
-[ext_resource type="PackedScene" uid="uid://b0oecr3dh2xjk" path="res://Monster/fartalot.tscn" id="4_4344g"]
-[ext_resource type="Texture2D" uid="uid://boogj8hgjqb2l" path="res://Assets/trees.png" id="8_c2syp"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tnuj8"]
-light_mode = 1
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p08bv"]
-atlas = ExtResource("2_toqc2")
-region = Rect2(0, 0, 32, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_250hq"]
-atlas = ExtResource("2_toqc2")
-region = Rect2(32, 0, 32, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s2pex"]
-atlas = ExtResource("2_toqc2")
-region = Rect2(64, 0, 32, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kyrk0"]
-atlas = ExtResource("2_toqc2")
-region = Rect2(96, 0, 32, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_r3enu"]
-atlas = ExtResource("2_toqc2")
-region = Rect2(128, 0, 32, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_igm5m"]
-atlas = ExtResource("2_toqc2")
-region = Rect2(160, 0, 32, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x7ebs"]
-atlas = ExtResource("2_toqc2")
-region = Rect2(192, 0, 32, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_oxiq2"]
-atlas = ExtResource("2_toqc2")
-region = Rect2(224, 0, 32, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_l433a"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_p08bv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_250hq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_s2pex")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kyrk0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_r3enu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_igm5m")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x7ebs")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_oxiq2")
-}],
-"loop": true,
-"name": &"Idle",
-"speed": 3.0
-}]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rowm8"]
-shader = ExtResource("1_thqcq")
-shader_parameter/dir = Vector2(0.1, 1)
-shader_parameter/quality = 4
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dbcvk"]
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(200, 0, 1)
-initial_velocity_max = 5.0
-gravity = Vector3(0, 98, 0)
-linear_accel_min = -2.23517e-06
-linear_accel_max = 150.0
-color = Color(0, 0, 0, 1)
-hue_variation_min = -2.23517e-08
-hue_variation_max = -2.23517e-08
+[ext_resource type="Script" path="res://Scripts/intro_scene.gd" id="1_0cuf8"]
+[ext_resource type="PackedScene" uid="uid://bntwwuoeq7rjd" path="res://Player/drago.tscn" id="3_rha75"]
+[ext_resource type="Texture2D" uid="uid://3k8v7m4mrwrt" path="res://Assets/Tileset.png" id="6_bn0i6"]
+[ext_resource type="Script" path="res://Scripts/transition_area1.gd" id="6_n1iax"]
+[ext_resource type="Texture2D" uid="uid://csblosj6qlsrr" path="res://Assets/Background-Sheet.png" id="7_is41k"]
+[ext_resource type="FontFile" uid="uid://dsfa457rfkluc" path="res://Assets/dogicapixelbold.ttf" id="7_r2o3w"]
+[ext_resource type="Texture2D" uid="uid://boogj8hgjqb2l" path="res://Assets/trees.png" id="8_t5k4k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8bqs7"]
-texture = ExtResource("2_misxq")
+texture = ExtResource("6_bn0i6")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
@@ -119,7 +34,7 @@ physics_layer_0/collision_mask = 2
 sources/0 = SubResource("TileSetAtlasSource_8bqs7")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2w1av"]
-texture = ExtResource("2_misxq")
+texture = ExtResource("6_bn0i6")
 0:2/0 = 0
 1:2/0 = 0
 2:2/0 = 0
@@ -129,7 +44,7 @@ texture = ExtResource("2_misxq")
 sources/0 = SubResource("TileSetAtlasSource_2w1av")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kr53w"]
-texture = ExtResource("2_misxq")
+texture = ExtResource("6_bn0i6")
 6:0/0 = 0
 6:0/0/z_index = -1
 6:1/0 = 0
@@ -156,46 +71,72 @@ texture = ExtResource("2_misxq")
 [sub_resource type="TileSet" id="TileSet_stok1"]
 sources/0 = SubResource("TileSetAtlasSource_kr53w")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_402ey"]
-size = Vector2(51, 180)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1r1a1"]
+size = Vector2(25, 174)
 
-[node name="Scene_1" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yo1gr"]
+size = Vector2(26, 154)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1au33"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jacu3"]
+size = Vector2(2, 20)
+
+[sub_resource type="Animation" id="Animation_x85gj"]
+resource_name = "starting screen"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/Label:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hpodl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/Label:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3abaq"]
+_data = {
+"RESET": SubResource("Animation_hpodl"),
+"starting screen": SubResource("Animation_x85gj")
+}
+
+[node name="Intro Scene" type="Node2D"]
 position = Vector2(0, -6)
-script = ExtResource("1_6ndia")
+script = ExtResource("1_0cuf8")
 
-[node name="Fartabunch" type="AnimatedSprite2D" parent="."]
-z_index = 1
-material = SubResource("CanvasItemMaterial_tnuj8")
-position = Vector2(206, 112)
-sprite_frames = SubResource("SpriteFrames_l433a")
-animation = &"Idle"
+[node name="Drago" parent="." instance=ExtResource("3_rha75")]
+position = Vector2(331, 117)
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-position = Vector2(0, 5)
-color = Color(0, 0, 0, 1)
+[node name="AnimatedSprite2D" parent="Drago" index="0"]
+flip_h = true
 
-[node name="Drago" parent="." instance=ExtResource("1_xd8ef")]
-position = Vector2(-479, 128)
+[node name="CollisionShape2D" parent="Drago" index="1"]
+position = Vector2(1, 8)
 
 [node name="Camera2D" parent="Drago" index="2"]
 limit_left = -640
 limit_top = 0
 limit_right = 320
 limit_bottom = 180
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Drago"]
-z_index = 10
-material = SubResource("ShaderMaterial_rowm8")
-position = Vector2(-37, -187)
-amount = 300
-process_material = SubResource("ParticleProcessMaterial_dbcvk")
-lifetime = 2.0
-preprocess = 2.0
-visibility_rect = Rect2(-700, -400, 1000, 1000)
-
-[node name="Fartalot" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_4344g")]
-position = Vector2(-704, 128)
-player = NodePath("../Drago")
 
 [node name="GroundTile" type="TileMapLayer" parent="."]
 z_index = 1
@@ -212,7 +153,7 @@ tile_set = SubResource("TileSet_stok1")
 
 [node name="House" type="Sprite2D" parent="."]
 position = Vector2(160, 96)
-texture = ExtResource("3_0xkls")
+texture = ExtResource("7_is41k")
 hframes = 3
 vframes = 3
 frame = 6
@@ -226,27 +167,27 @@ scroll_scale = Vector2(1.5, 1)
 [node name="Trees" type="Sprite2D" parent="Parallax/ExtraForeground"]
 z_index = 5
 position = Vector2(41, 90)
-texture = ExtResource("8_c2syp")
+texture = ExtResource("8_t5k4k")
 hframes = 4
 
 [node name="Trees2" type="Sprite2D" parent="Parallax/ExtraForeground"]
 z_index = 5
 position = Vector2(-342, 90)
-texture = ExtResource("8_c2syp")
+texture = ExtResource("8_t5k4k")
 hframes = 4
 frame = 1
 
 [node name="Trees3" type="Sprite2D" parent="Parallax/ExtraForeground"]
 z_index = 5
 position = Vector2(-915, 90)
-texture = ExtResource("8_c2syp")
+texture = ExtResource("8_t5k4k")
 hframes = 4
 frame = 2
 
 [node name="Trees4" type="Sprite2D" parent="Parallax/ExtraForeground"]
 z_index = 5
 position = Vector2(-101, 90)
-texture = ExtResource("8_c2syp")
+texture = ExtResource("8_t5k4k")
 hframes = 4
 frame = 3
 
@@ -259,7 +200,7 @@ repeat_times = 2
 z_index = 2
 position = Vector2(160, 90)
 scale = Vector2(1.001, 1)
-texture = ExtResource("3_0xkls")
+texture = ExtResource("7_is41k")
 hframes = 3
 vframes = 3
 frame = 7
@@ -273,7 +214,7 @@ repeat_times = 2
 [node name="Fog2" type="Sprite2D" parent="Parallax/Fog2"]
 z_index = -5
 position = Vector2(160, 90)
-texture = ExtResource("3_0xkls")
+texture = ExtResource("7_is41k")
 hframes = 3
 vframes = 3
 frame = 5
@@ -287,7 +228,7 @@ repeat_times = 2
 z_index = -6
 position = Vector2(160, 90)
 scale = Vector2(1.001, 1)
-texture = ExtResource("3_0xkls")
+texture = ExtResource("7_is41k")
 hframes = 3
 vframes = 3
 frame = 4
@@ -301,7 +242,7 @@ repeat_times = 2
 z_index = -7
 position = Vector2(160, 90)
 scale = Vector2(1.001, 1)
-texture = ExtResource("3_0xkls")
+texture = ExtResource("7_is41k")
 hframes = 3
 vframes = 3
 frame = 3
@@ -315,7 +256,7 @@ repeat_times = 2
 [node name="Fog1" type="Sprite2D" parent="Parallax/Fog1"]
 z_index = -8
 position = Vector2(160, 90)
-texture = ExtResource("3_0xkls")
+texture = ExtResource("7_is41k")
 hframes = 3
 vframes = 3
 frame = 2
@@ -329,7 +270,7 @@ repeat_times = 2
 z_index = -9
 position = Vector2(160, 90)
 scale = Vector2(1.001, 1)
-texture = ExtResource("3_0xkls")
+texture = ExtResource("7_is41k")
 hframes = 3
 vframes = 3
 frame = 1
@@ -342,7 +283,7 @@ repeat_times = 2
 z_index = -10
 position = Vector2(160, 90)
 scale = Vector2(1.001, 1)
-texture = ExtResource("3_0xkls")
+texture = ExtResource("7_is41k")
 hframes = 3
 vframes = 3
 
@@ -352,15 +293,58 @@ vframes = 3
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Barrier/StaticBody2D"]
-position = Vector2(341, 90)
-shape = SubResource("RectangleShape2D_402ey")
+unique_name_in_owner = true
+position = Vector2(327.5, 87)
+shape = SubResource("RectangleShape2D_1r1a1")
+disabled = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Barrier/StaticBody2D"]
-position = Vector2(-665, 90)
-shape = SubResource("RectangleShape2D_402ey")
+position = Vector2(-653, 77)
+shape = SubResource("RectangleShape2D_yo1gr")
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Barrier/StaticBody2D"]
 polygon = PackedVector2Array(255, 138, 259, 136, 264, 136, 268, 133, 273, 133, 277, 130, 283, 130, 287, 127, 342, 127, 342, 138)
+
+[node name="StopArea" type="Area2D" parent="."]
+position = Vector2(233, 138)
+scale = Vector2(0.12, 0.599995)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StopArea"]
+shape = SubResource("RectangleShape2D_1au33")
+
+[node name="TransitionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_n1iax")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
+position = Vector2(-633, 134)
+shape = SubResource("RectangleShape2D_jacu3")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+z_index = 5
+offset_left = 27.0
+offset_top = 172.0
+offset_right = 180.0
+offset_bottom = 212.0
+rotation = -1.5708
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_r2o3w")
+theme_override_font_sizes/font_size = 8
+text = "Press Any Key to Start"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3abaq")
+}
+
+[connection signal="body_entered" from="StopArea" to="." method="_on_stop_area_body_entered"]
+[connection signal="body_entered" from="TransitionArea" to="TransitionArea" method="_on_body_entered"]
 
 [editable path="Drago"]
 [editable path="Drago/CanvasLayer/StaminaBatteryBar"]

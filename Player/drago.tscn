@@ -289,7 +289,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mxcdm"]
-size = Vector2(8, 12)
+size = Vector2(8, 16)
 
 [node name="Drago" type="CharacterBody2D"]
 z_index = 1
@@ -299,10 +299,10 @@ script = ExtResource("1_5g0iv")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("CanvasItemMaterial_k2vpg")
 sprite_frames = SubResource("SpriteFrames_wd2j4")
-animation = &"Run_f"
+animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 6)
+position = Vector2(-1, 8)
 shape = SubResource("RectangleShape2D_mxcdm")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -327,6 +327,7 @@ position = Vector2(-1, 6)
 polygon = PackedVector2Array(8, -3, 8, 5, 178, 79, 178, -73)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="StaminaBatteryBar" parent="CanvasLayer" instance=ExtResource("4_fv4pi")]
 
