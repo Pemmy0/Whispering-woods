@@ -15,7 +15,7 @@ func fade_in(time: float):
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "fade_out":
 		on_transition_finished.emit()
-		fade_in(1)
+		fade_in(2)
 
 func busy():
 	return animation_player.is_playing()

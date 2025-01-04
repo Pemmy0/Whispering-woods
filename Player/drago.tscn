@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://bntwwuoeq7rjd"]
+[gd_scene load_steps=45 format=3 uid="uid://bntwwuoeq7rjd"]
 
 [ext_resource type="Script" path="res://Player/drago.gd" id="1_5g0iv"]
 [ext_resource type="Texture2D" uid="uid://d1t467didvcwj" path="res://Assets/Drago-Sheet.png" id="2_lx8j5"]
@@ -291,7 +291,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mxcdm"]
 size = Vector2(8, 16)
 
-[node name="Drago" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gfgn3"]
+size = Vector2(8, 16)
+
+[node name="Drago" type="CharacterBody2D" groups=["player"]]
 z_index = 1
 collision_layer = 2
 script = ExtResource("1_5g0iv")
@@ -330,5 +333,14 @@ polygon = PackedVector2Array(8, -3, 8, 5, 178, 79, 178, -73)
 visible = false
 
 [node name="StaminaBatteryBar" parent="CanvasLayer" instance=ExtResource("4_fv4pi")]
+
+[node name="InteractBox" type="Area2D" parent="." groups=["interact"]]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractBox"]
+position = Vector2(-1, 8)
+shape = SubResource("RectangleShape2D_gfgn3")
+disabled = true
 
 [editable path="CanvasLayer/StaminaBatteryBar"]
