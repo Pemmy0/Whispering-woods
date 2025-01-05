@@ -23,6 +23,7 @@ var movement_animation: String
 var cant_run = false
 var cant_flash = false
 var tickle = 1
+var is_bigging = false
 var babayaga = 0
 var move_allowed = true
 
@@ -122,14 +123,16 @@ func bar_deplete(delta):
 		stamina = stamina_max
 		cant_run = false
 		
+		
 	if speed == 50:
 		stamina -= delta * 30
 		
-	if battery < 0:
+	if battery <= 0:
 		battery = 0
 		cant_flash = true
+		flashlight.visible = false
 	elif battery < battery_max:
-		battery += delta * 4
+		battery += delta * 5
 	elif battery > battery_max:
 		battery = battery_max
 		cant_flash = false
@@ -152,6 +155,9 @@ func flashlight_control():
 	flash_cols.disabled = !(flashlight.visible)
 	
 	if Input.is_action_just_pressed("Flash") && !cant_flash:
+		print("flashing")
+		var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT).set_parallel(true)
+		tween.tween_property(flashlight, "energy", 1, 0.2)
 		load_sfx(click)
 		audio_stream_player.pitch_scale += randf_range(-0.2, 0.2)
 		audio_stream_player.volume_db = 8
@@ -162,7 +168,7 @@ func flashlight_control():
 		audio_stream_player.pitch_scale += randf_range(-0.2, 0.2)
 		audio_stream_player.volume_db = 8
 		audio_stream_player.play()
-		battery += randi_range(1,5)
+		battery += randi_range(2,8)
 		flashlight.visible = false
 	elif Input.is_action_just_released("Flash"):
 		load_sfx(click)
@@ -171,16 +177,18 @@ func flashlight_control():
 		audio_stream_player.play()
 		flashlight.visible = false
 		
-	if Input.is_action_just_pressed("Big Flash"):
+	if Input.is_action_just_pressed("Big Flash") && !cant_flash:
 		tickle = 2
 		var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT).set_parallel(true)
 		tween.tween_property(flashlight, "scale", Vector2(0.231, 0.5), 0.2)
 		tween.tween_property(flashlight, "energy", 2, 0.2)
+		is_bigging = true
 	elif Input.is_action_just_released("Big Flash"):
 		tickle = 1
 		var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT).set_parallel(true)
 		tween.tween_property(flashlight, "scale", Vector2(0.231, 0.231), 0.2)
 		tween.tween_property(flashlight, "energy", 1, 0.2)
+		is_bigging = false
 	
 	var mousePos = get_local_mouse_position()
 	var clamp
@@ -192,17 +200,21 @@ func flashlight_control():
 	flashlight.rotation = angle
 	flash_cols.rotation = angle
 	
-	if battery <= 50 && battery > 0:
-		var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	if battery <= 50 && battery > 0 && !cant_flash :
+		var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT).set_parallel(true)
 		tween.tween_property(flashlight, "energy", 0.5, 0.5)
-	elif battery > 50:
-		var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-		tween.tween_property(flashlight, "energy", 1, 0.5)
+	else:
+		return
 	
 func _flip_light():
-	var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	flashlight.scale.x = 0
-	tween.tween_property(flashlight, "scale", Vector2(0.231, 0.231), 0.2)
+	if !is_bigging:
+		var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT).set_parallel(true)
+		flashlight.scale.x = 0
+		tween.tween_property(flashlight, "scale", Vector2(0.231, 0.231), 0.2)
+	else:
+		var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT).set_parallel(true)
+		flashlight.scale.x = 0
+		tween.tween_property(flashlight, "scale", Vector2(0.231, 0.5), 0.2)
 
 func auto_move(babayaga):
 	if !move_allowed:
