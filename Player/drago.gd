@@ -123,7 +123,6 @@ func bar_deplete(delta):
 		stamina = stamina_max
 		cant_run = false
 		
-		
 	if speed == 50:
 		stamina -= delta * 30
 		
@@ -138,7 +137,7 @@ func bar_deplete(delta):
 		cant_flash = false
 		
 	if !flash_cols.disabled:
-		battery -= delta * 20 * tickle
+		battery -= delta * 22 * tickle
 		
 func animation_control(direction):
 	if direction != 0:
