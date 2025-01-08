@@ -230,11 +230,11 @@ func _on_animated_sprite_2d_frame_changed():
 		return
 	if ObjectLibrary.is_raining:
 		load_sfx(sfx_wet)
-		audio_stream_player.volume_db = -3
+		audio_stream_player.volume_db = -10
 	else: 
 		load_sfx(sfx_dry)
 		
 	if animated_sprite_2d.frame in footstep_frames: 
 		audio_stream_player.pitch_scale += randf_range(-0.1, 0.1)
-		audio_stream_player.volume_db = 2
+		audio_stream_player.volume_db = -2
 		audio_stream_player.play()
