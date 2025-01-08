@@ -7,8 +7,8 @@ extends CharacterBody2D
 @onready var audio_stream_player = $AudioStreamPlayer
 @onready var monster_noise = $MonsterNoise
 
-var speed = 20.0
-var max_speed = 20
+var speed = 21.0
+var max_speed = 21
 var direction : float
 var player_distance
 
@@ -39,7 +39,7 @@ func movement(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		
-	if speed > 0:speed += delta * 15
+	if speed > 0:speed += delta * 16
 	
 func animation_control(direction):
 	if velocity.x != 0:

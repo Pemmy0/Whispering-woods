@@ -123,7 +123,6 @@ func bar_deplete(delta):
 		stamina = stamina_max
 		cant_run = false
 		
-		
 	if speed == 50:
 		stamina -= delta * 30
 		
@@ -138,7 +137,7 @@ func bar_deplete(delta):
 		cant_flash = false
 		
 	if !flash_cols.disabled:
-		battery -= delta * 20 * tickle
+		battery -= delta * 22 * tickle
 		
 func animation_control(direction):
 	if direction != 0:
@@ -230,11 +229,11 @@ func _on_animated_sprite_2d_frame_changed():
 		return
 	if ObjectLibrary.is_raining:
 		load_sfx(sfx_wet)
-		audio_stream_player.volume_db = -3
+		audio_stream_player.volume_db = -10
 	else: 
 		load_sfx(sfx_dry)
 		
 	if animated_sprite_2d.frame in footstep_frames: 
 		audio_stream_player.pitch_scale += randf_range(-0.1, 0.1)
-		audio_stream_player.volume_db = 2
+		audio_stream_player.volume_db = -2
 		audio_stream_player.play()
