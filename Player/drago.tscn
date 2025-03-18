@@ -1,6 +1,6 @@
 [gd_scene load_steps=49 format=3 uid="uid://bntwwuoeq7rjd"]
 
-[ext_resource type="Script" path="res://Player/drago.gd" id="1_5g0iv"]
+[ext_resource type="Script" uid="uid://drj4mrhd7jyck" path="res://Player/drago.gd" id="1_5g0iv"]
 [ext_resource type="AudioStream" uid="uid://cwlffubxoufdj" path="res://SFX/Walk Grass 1.mp3" id="2_aw4jw"]
 [ext_resource type="Texture2D" uid="uid://d1t467didvcwj" path="res://Assets/Drago-Sheet.png" id="2_lx8j5"]
 [ext_resource type="AudioStream" uid="uid://56gdvw0s8v6x" path="res://SFX/Wet Grass 1.mp3" id="3_60sgq"]

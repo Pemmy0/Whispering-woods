@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var audio_stream_player = $AudioStreamPlayer
+@onready var audio_stream_player_2 = $AudioStreamPlayer2
 @onready var drago = $Drago
 
 var only_press_once = false
@@ -10,6 +11,7 @@ func _ready():
 	ObjectLibrary.is_raining = false
 	drago.move_allowed = false
 	audio_stream_player.play()
+	audio_stream_player_2.play()
 
 func _physics_process(delta):
 	if !drago.move_allowed:
