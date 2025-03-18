@@ -5,18 +5,16 @@ extends CharacterBody2D
 
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var audio_stream_player = $AudioStreamPlayer
-@onready var monster_noise = $MonsterNoise
 
-var speed = 21.0
-var max_speed = 21
+var speed = 18.0
+var max_speed = 18
 var direction : float
 var player_distance
 
-var footstep_frames: Array = [0, 4]
+var footstep_frames: Array = [0]
 
 func _ready():
 	ObjectLibrary.dont_move_you_donkey = true
-	monster_noise.play()
 	
 func _physics_process(delta):
 	player_distance = player.global_position - global_position
@@ -39,7 +37,7 @@ func movement(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		
-	if speed > 0:speed += delta * 16
+	if speed > 0:speed += delta * 14
 	
 func animation_control(direction):
 	if velocity.x != 0:
@@ -74,8 +72,6 @@ func _on_animated_sprite_2d_frame_changed():
 		return
 		
 	load_sfx(sfx_wet)
-	audio_stream_player.volume_db = -3
+	audio_stream_player.volume_db = -12
 	if animated_sprite_2d.frame in footstep_frames: 
-		audio_stream_player.pitch_scale += randf_range(-0.2, 0.2)
-		audio_stream_player.volume_db = 2
 		audio_stream_player.play()

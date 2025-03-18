@@ -1,20 +1,20 @@
 [gd_scene load_steps=39 format=4 uid="uid://56owp6o16s40"]
 
-[ext_resource type="Script" path="res://Scripts/scene_0_1.gd" id="1_347pb"]
+[ext_resource type="Script" uid="uid://djuv5kgqd88uh" path="res://Scripts/scene_0_1.gd" id="1_347pb"]
 [ext_resource type="PackedScene" uid="uid://bntwwuoeq7rjd" path="res://Player/drago.tscn" id="3_khvvx"]
 [ext_resource type="AudioStream" uid="uid://cgq2xuj3o5ymo" path="res://SFX/Walk Grass 2.mp3" id="4_lnwsh"]
-[ext_resource type="Shader" path="res://Shaders/motion_blur.gdshader" id="4_mdewh"]
+[ext_resource type="Shader" uid="uid://dotu4dvya261m" path="res://Shaders/motion_blur.gdshader" id="4_mdewh"]
 [ext_resource type="Texture2D" uid="uid://3k8v7m4mrwrt" path="res://Assets/Tileset.png" id="6_pt0pl"]
-[ext_resource type="Script" path="res://Scripts/transition_area2.gd" id="7_0ifij"]
+[ext_resource type="Script" uid="uid://b1q3twoypywt0" path="res://Scripts/transition_area2.gd" id="7_0ifij"]
 [ext_resource type="Texture2D" uid="uid://csblosj6qlsrr" path="res://Assets/Background-Sheet.png" id="7_wiedq"]
-[ext_resource type="Script" path="res://Scripts/key.gd" id="8_iclvf"]
+[ext_resource type="Script" uid="uid://dhib3qa8aw4tv" path="res://Scripts/key.gd" id="8_iclvf"]
 [ext_resource type="Texture2D" uid="uid://boogj8hgjqb2l" path="res://Assets/trees.png" id="8_y8d5u"]
 [ext_resource type="Texture2D" uid="uid://bljsngm7u0vkh" path="res://Assets/key.png" id="9_cpdhp"]
-[ext_resource type="Script" path="res://Scripts/flashlight.gd" id="10_4gsmd"]
+[ext_resource type="Script" uid="uid://c20jamd0k34de" path="res://Scripts/flashlight.gd" id="10_4gsmd"]
 [ext_resource type="FontFile" uid="uid://dc78awiwq35bs" path="res://Assets/pixel_font.ttf" id="11_1i347"]
 [ext_resource type="AudioStream" uid="uid://4j5hrvmo5adk" path="res://SFX/key.mp3" id="12_ui35e"]
 [ext_resource type="AudioStream" uid="uid://dp2cqvwix2xe8" path="res://SFX/Rain Ambience.mp3" id="13_c382c"]
-[ext_resource type="Script" path="res://Scripts/noise_trigger.gd" id="13_ip2ng"]
+[ext_resource type="Script" uid="uid://b6i0pckjqfrt2" path="res://Scripts/noise_trigger.gd" id="13_ip2ng"]
 [ext_resource type="AudioStream" uid="uid://du8jp0qkxgmx1" path="res://SFX/Door Open and Close.mp3" id="15_5h47q"]
 [ext_resource type="AudioStream" uid="uid://bbr0vyaugmrst" path="res://SFX/Clicking.mp3" id="16_l06ut"]
 [ext_resource type="AudioStream" uid="uid://hy1gfp0m7dg3" path="res://SFX/Monster Breathing slow.mp3" id="18_l506a"]
@@ -171,8 +171,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1rlbm"]
 _data = {
-"RESET": SubResource("Animation_e4jgi"),
-"get em key": SubResource("Animation_vukub")
+&"RESET": SubResource("Animation_e4jgi"),
+&"get em key": SubResource("Animation_vukub")
 }
 
 [node name="Scene_0_1" type="Node2D"]
@@ -198,10 +198,10 @@ z_index = 10
 material = SubResource("ShaderMaterial_rowm8")
 position = Vector2(-37, -187)
 amount = 300
-process_material = SubResource("ParticleProcessMaterial_dbcvk")
 lifetime = 2.0
 preprocess = 2.0
 visibility_rect = Rect2(-700, -400, 1000, 1000)
+process_material = SubResource("ParticleProcessMaterial_dbcvk")
 
 [node name="TileMaps" type="Node2D" parent="."]
 
@@ -454,7 +454,7 @@ shape = SubResource("RectangleShape2D_6fu8o")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_1rlbm")
+&"": SubResource("AnimationLibrary_1rlbm")
 }
 
 [node name="RainSFX" type="AudioStreamPlayer" parent="."]
