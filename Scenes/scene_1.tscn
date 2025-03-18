@@ -1,22 +1,25 @@
-[gd_scene load_steps=47 format=4 uid="uid://cwep8hedvali2"]
+[gd_scene load_steps=50 format=4 uid="uid://cwep8hedvali2"]
 
-[ext_resource type="Script" path="res://Scripts/scene_1.gd" id="1_6ndia"]
-[ext_resource type="Shader" path="res://Shaders/motion_blur.gdshader" id="1_thqcq"]
+[ext_resource type="Script" uid="uid://cqupdi27em5c2" path="res://Scripts/scene_1.gd" id="1_6ndia"]
+[ext_resource type="Shader" uid="uid://dotu4dvya261m" path="res://Shaders/motion_blur.gdshader" id="1_thqcq"]
 [ext_resource type="PackedScene" uid="uid://bntwwuoeq7rjd" path="res://Player/drago.tscn" id="1_xd8ef"]
 [ext_resource type="Texture2D" uid="uid://3k8v7m4mrwrt" path="res://Assets/Tileset.png" id="2_misxq"]
 [ext_resource type="Texture2D" uid="uid://wb1e1yd8xg3u" path="res://Assets/Fartabunch-Sheet.png" id="2_toqc2"]
 [ext_resource type="Texture2D" uid="uid://csblosj6qlsrr" path="res://Assets/Background-Sheet.png" id="3_0xkls"]
 [ext_resource type="PackedScene" uid="uid://b0oecr3dh2xjk" path="res://Monster/fartalot.tscn" id="4_4344g"]
+[ext_resource type="AudioStream" uid="uid://56gdvw0s8v6x" path="res://SFX/Wet Grass 1.mp3" id="6_a00a6"]
 [ext_resource type="Texture2D" uid="uid://boogj8hgjqb2l" path="res://Assets/trees.png" id="8_c2syp"]
-[ext_resource type="Script" path="res://Scripts/key.gd" id="9_3kcdh"]
+[ext_resource type="AudioStream" uid="uid://y0s1gsa2cwtw" path="res://SFX/Monster Breathe Chase.mp3" id="8_otufq"]
+[ext_resource type="Script" uid="uid://dhib3qa8aw4tv" path="res://Scripts/key.gd" id="9_3kcdh"]
 [ext_resource type="Texture2D" uid="uid://bljsngm7u0vkh" path="res://Assets/key.png" id="10_b3k6f"]
-[ext_resource type="Script" path="res://Scripts/transition_area3.gd" id="11_lhjno"]
+[ext_resource type="Script" uid="uid://cv5assw8vfhsn" path="res://Scripts/transition_area3.gd" id="11_lhjno"]
 [ext_resource type="FontFile" uid="uid://dc78awiwq35bs" path="res://Assets/pixel_font.ttf" id="12_4guan"]
-[ext_resource type="Script" path="res://Scripts/trigger1.gd" id="13_f3to8"]
-[ext_resource type="Script" path="res://Scripts/trigger_2.gd" id="14_6qrkp"]
+[ext_resource type="Script" uid="uid://qky47ago7rqp" path="res://Scripts/trigger1.gd" id="13_f3to8"]
+[ext_resource type="Script" uid="uid://cvfw403m33kqo" path="res://Scripts/trigger_2.gd" id="14_6qrkp"]
 [ext_resource type="AudioStream" uid="uid://dp2cqvwix2xe8" path="res://SFX/Rain Ambience.mp3" id="15_35n85"]
 [ext_resource type="AudioStream" uid="uid://4j5hrvmo5adk" path="res://SFX/key.mp3" id="16_ti18q"]
 [ext_resource type="AudioStream" uid="uid://du8jp0qkxgmx1" path="res://SFX/Door Open and Close.mp3" id="17_0i8n2"]
+[ext_resource type="AudioStream" uid="uid://7m57r836q6of" path="res://Music/JumpscareSFX.mp3" id="18_4dwmg"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tnuj8"]
 light_mode = 1
@@ -234,8 +237,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1rlbm"]
 _data = {
-"RESET": SubResource("Animation_e4jgi"),
-"get em key": SubResource("Animation_vukub")
+&"RESET": SubResource("Animation_e4jgi"),
+&"get em key": SubResource("Animation_vukub")
 }
 
 [node name="Scene_1" type="Node2D" node_paths=PackedStringArray("drago")]
@@ -268,14 +271,15 @@ z_index = 10
 material = SubResource("ShaderMaterial_rowm8")
 position = Vector2(-37, -187)
 amount = 300
-process_material = SubResource("ParticleProcessMaterial_dbcvk")
 lifetime = 2.0
 preprocess = 2.0
 visibility_rect = Rect2(-700, -400, 1000, 1000)
+process_material = SubResource("ParticleProcessMaterial_dbcvk")
 
 [node name="Fartalot" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_4344g")]
 position = Vector2(-656, 128)
 player = NodePath("../Drago")
+sfx_wet = ExtResource("6_a00a6")
 
 [node name="GroundTile" type="TileMapLayer" parent="."]
 z_index = 1
@@ -508,7 +512,7 @@ shape = SubResource("RectangleShape2D_wgurj")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_1rlbm")
+&"": SubResource("AnimationLibrary_1rlbm")
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -521,6 +525,14 @@ volume_db = 10.0
 
 [node name="DoorSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_0i8n2")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_4dwmg")
+volume_db = -6.0
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_otufq")
+volume_db = -2.0
 
 [connection signal="area_entered" from="Key" to="Key" method="_on_area_entered"]
 [connection signal="area_entered" from="TransitionArea" to="TransitionArea" method="_on_area_entered"]
